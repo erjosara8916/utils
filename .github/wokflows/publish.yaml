@@ -7,6 +7,7 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       contents: read
       packages: write # Permiso para escribir en GitHub Packages
@@ -18,7 +19,7 @@ jobs:
     - name: Configurar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '22'
         registry-url: 'https://npm.pkg.github.com' # Apunta al registro de GitHub
         scope: '@erjosara8916' # El scope de tu paquete
 
@@ -30,4 +31,4 @@ jobs:
     - name: Publicar el paquete
       run: npm publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_PACKAGES_TOKEN }} # Token de autenticación automático de GitHub
+        NODE_AUTH_TOKEN: ${{ secrets.GH_NPM_TOKEN }} # Token de autenticación automático de GitHub
