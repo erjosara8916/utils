@@ -1,5 +1,5 @@
 {
-  "name": "@erjosara8916/math-utils",
+  "name": "@erjosara8916/utils",
   "version": "0.1.0",
   "description": "Biblioteca de utilidades matemáticas para operações básicas",
   "main": "dist/index.js",
