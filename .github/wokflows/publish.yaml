@@ -1,0 +1,33 @@
+name: Publicar en GitHub Packages
+
+on:
+  release:
+    types: [created] # Se activa cuando se crea un nuevo release
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # Permiso para escribir en GitHub Packages
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        registry-url: 'https://npm.pkg.github.com' # Apunta al registro de GitHub
+        scope: '@erjosara8916' # El scope de tu paquete
+
+    - name: Instalar dependencias y compilar
+      run: |
+        npm install
+        npm run build
+
+    - name: Publicar el paquete
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token de autenticación automático de GitHub
