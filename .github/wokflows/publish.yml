@@ -1,34 +1,33 @@
-name: Publicar en GitHub Packages
+name: Publicar en GitHub Packages (Manual)
 
+# Cambiamos el disparador a "workflow_dispatch"
 on:
-  release:
-    types: [created] # Se activa cuando se crea un nuevo release
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
-    environment: production
     permissions:
       contents: read
       packages: write # Permiso para escribir en GitHub Packages
 
     steps:
     - name: Checkout del código
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4 # Usamos una versión más reciente
 
     - name: Configurar Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4 # Usamos una versión más reciente
       with:
-        node-version: '22'
-        registry-url: 'https://npm.pkg.github.com' # Apunta al registro de GitHub
-        scope: '@erjosara8916' # El scope de tu paquete
+        node-version: '22' # Puedes usar una versión LTS más reciente como la 20
+        registry-url: 'https://npm.pkg.github.com/'
+        scope: '@erjosara8916' # Asegúrate que tu usuario esté aquí
 
     - name: Instalar dependencias y compilar
       run: |
-        npm install
+        npm ci # 'ci' es más rápido y seguro para workflows
         npm run build
 
     - name: Publicar el paquete
       run: npm publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.GH_NPM_TOKEN }} # Token de autenticación automático de GitHub
+        NODE_AUTH_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
