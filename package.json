@@ -1,0 +1,46 @@
+{
+  "name": "@erjosara8916/math-utils",
+  "version": "0.1.0",
+  "description": "Biblioteca de utilidades matemáticas para operações básicas",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "nodemon --watch src --watch __tests__ --ext ts --exec 'npm test'",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "lint": "eslint src --ext ts",
+    "preversion": "npm run lint",
+    "version": "npm run lint && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "keywords": [
+    "mathematics",
+    "utilities",
+    "typescript"
+  ],
+  "author": "Erick",
+  "license": "MIT",
+  "type": "commonjs",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erjosara8916/utils.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.33.0",
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10",
+    "ts-jest": "^29.4.1"
+  }
+}
