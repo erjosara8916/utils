@@ -30,4 +30,4 @@ jobs:
     - name: Publicar el paquete
       run: npm publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Token de autenticación automático de GitHub
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_PACKAGES_TOKEN }} # Token de autenticación automático de GitHub
